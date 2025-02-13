@@ -114,13 +114,12 @@ function startMinigame() {
       return;
     }
 
-    // Create a floating heart
+    // Create a heart for the minigame
     const heart = document.createElement('div');
     heart.classList.add('heart');
     heart.innerHTML = '❤️';
     heart.style.left = Math.random() * (window.innerWidth - 50) + 'px';
     heart.style.top = Math.random() * (window.innerHeight - 100) + 'px';
-    heart.style.animationDuration = Math.random() * 3 + 2 + 's'; // Random animation speed
     heart.addEventListener('click', () => {
       score++;
       document.getElementById('score').textContent = `Wynik: ${score}`;
@@ -138,7 +137,7 @@ function startMinigame() {
   }, 1000);
 }
 
-// Create floating hearts every 300ms
+// Create floating hearts every 300ms on the main page
 setInterval(createFloatingHeart, 300);
 
 // Position photos on page load
