@@ -1,122 +1,134 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    background-color: #ffebf2;
-    font-family: 'Arial', sans-serif;
-    overflow: hidden;
-  }
-  
-  /* Main Page Styles */
-  #main-page {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-  }
-  
-  .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 10;
-  }
-  
-  h1 {
-    font-size: 3rem;
-    color: #d32f2f;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  h2 {
-    font-size: 1rem;
-    color: #d32f2f;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #b71c1c;
-  }
-  
-  /* Sticky Note Photos */
-  .photos {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
+body {
+  background-color: #ffebf2;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+/* Main Page Styles */
+#main-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #d32f2f;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+h1 {
+  font-size: 1rem;
+  color: #d32f2f;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b71c1c;
+}
+
+/* Sticky Note Photos */
+.photos {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sticky-note {
+  position: absolute;
+  width: 150px; /* Default size */
+  height: auto;
+  border: 5px solid #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  transform: rotate(var(--rotation));
+}
+
+/* Adjust photo size for mobile devices */
+@media (max-width: 600px) {
   .sticky-note {
-    position: absolute;
-    width: 150px; /* Default size */
-    height: auto;
-    border: 5px solid #fff;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-    transform: rotate(var(--rotation));
+    width: 100px; /* Smaller size for mobile */
   }
-  
-  /* Adjust photo size for mobile devices */
-  @media (max-width: 600px) {
-    .sticky-note {
-      width: 100px; /* Smaller size for mobile */
-    }
+}
+
+/* Minigame Page Styles */
+#minigame-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffebf2;
+}
+
+.minigame-container {
+  text-align: center;
+}
+
+.minigame-container h2 {
+  font-size: 2rem;
+  color: #d32f2f;
+}
+
+.minigame-container p {
+  font-size: 1.2rem;
+  color: #d32f2f;
+}
+
+#hearts-container {
+  position: relative;
+  width: 100vw;
+  height: 80vh;
+  overflow: hidden;
+}
+
+/* Floating Hearts Animation */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  /* Minigame Page Styles */
-  #minigame-page {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffebf2;
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
   }
-  
-  .minigame-container {
-    text-align: center;
-  }
-  
-  .minigame-container h2 {
-    font-size: 2rem;
-    color: #d32f2f;
-  }
-  
-  .minigame-container p {
-    font-size: 1.2rem;
-    color: #d32f2f;
-  }
-  
-  #hearts-container {
-    position: relative;
-    width: 100vw;
-    height: 80vh;
-    overflow: hidden;
-  }
-  
-  .heart {
-    position: absolute;
-    font-size: 2rem;
-    color: #ff4d6a;
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .hidden {
-    display: none;
-  }
+}
+
+.heart {
+  position: absolute;
+  font-size: 2rem;
+  color: #ff4d6a;
+  cursor: pointer;
+  user-select: none;
+  animation: float 5s infinite ease-in; /* Add floating animation */
+}
+
+.hidden {
+  display: none;
+}

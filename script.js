@@ -3,6 +3,21 @@ const mainPage = document.getElementById('main-page');
 const minigamePage = document.getElementById('minigame-page');
 const playButton = document.getElementById('play-button');
 
+// Function to create a floating heart
+function createFloatingHeart() {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.innerHTML = '❤️';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+  document.body.appendChild(heart);
+
+  // Remove the heart after the animation ends
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}
+
 // Function to position photos randomly without overlapping
 function positionPhotos() {
   const photos = document.querySelectorAll('.sticky-note');
@@ -99,11 +114,13 @@ function startMinigame() {
       return;
     }
 
+    // Create a floating heart
     const heart = document.createElement('div');
     heart.classList.add('heart');
     heart.innerHTML = '❤️';
     heart.style.left = Math.random() * (window.innerWidth - 50) + 'px';
     heart.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+    heart.style.animationDuration = Math.random() * 3 + 2 + 's'; // Random animation speed
     heart.addEventListener('click', () => {
       score++;
       document.getElementById('score').textContent = `Wynik: ${score}`;
@@ -120,6 +137,9 @@ function startMinigame() {
     }
   }, 1000);
 }
+
+// Create floating hearts every 300ms
+setInterval(createFloatingHeart, 300);
 
 // Position photos on page load
 window.addEventListener('load', positionPhotos);
