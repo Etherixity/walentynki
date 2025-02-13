@@ -10,20 +10,13 @@ body {
   overflow: hidden;
 }
 
-/* Main Page Styles */
-#main-page {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-}
-
 .container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  z-index: 10;
+  z-index: 10; /* Ensure text is above photos */
 }
 
 h1 {
@@ -31,51 +24,21 @@ h1 {
   color: #d32f2f;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
-h1 {
+
+h2 {
   font-size: 1rem;
   color: #d32f2f;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  background-color: #d32f2f;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
-button:hover {
-  background-color: #b71c1c;
-}
-
-/* Sticky Note Photos */
-.photos {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.sticky-note {
+.heart {
   position: absolute;
-  width: 150px; /* Default size */
-  height: auto;
-  border: 5px solid #fff;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-  transform: rotate(var(--rotation));
+  bottom: -10%;
+  color: #ff4d6a;
+  font-size: 24px;
+  animation: float 5s infinite ease-in;
 }
 
-/* Adjust photo size for mobile devices */
-@media (max-width: 600px) {
-  .sticky-note {
-    width: 100px; /* Smaller size for mobile */
-  }
-}
-
-/* Floating Hearts Animation */
 @keyframes float {
   0% {
     transform: translateY(0);
@@ -87,46 +50,56 @@ button:hover {
   }
 }
 
-.heart {
-  position: absolute;
-  font-size: 2rem;
-  color: #ff4d6a;
-  user-select: none;
-  animation: float 5s infinite ease-in; /* Add floating animation */
-}
-
-/* Minigame Page Styles */
-#minigame-page {
+/* Sticky note photo styles */
+.photos {
   position: relative;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffebf2;
-}
-
-.minigame-container {
-  text-align: center;
-}
-
-.minigame-container h2 {
-  font-size: 2rem;
-  color: #d32f2f;
-}
-
-.minigame-container p {
-  font-size: 1.2rem;
-  color: #d32f2f;
-}
-
-#hearts-container {
-  position: relative;
-  width: 100vw;
-  height: 80vh;
   overflow: hidden;
 }
 
-.hidden {
-  display: none;
+.sticky-note {
+  position: absolute;
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+  border: 5px solid #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  transform: rotate(var(--rotation)); /* Random rotation */
+}
+
+/* Heart message container */
+.heart-message-container {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 20; /* Ensure it's above everything */
+}
+
+.heart-message {
+  font-size: 2rem;
+  color: #d32f2f;
+  background-color: #ffebf2;
+  padding: 20px;
+  border-radius: 20px;
+  border: 5px solid #d32f2f;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+}
+
+/* Button styles */
+#nextMessageButton {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+#nextMessageButton:hover {
+  background-color: #ff4d6a;
 }

@@ -1,10 +1,35 @@
-// Main Page Logic
-const mainPage = document.getElementById('main-page');
-const minigamePage = document.getElementById('minigame-page');
-const playButton = document.getElementById('play-button');
+// Array of messages
+const messages = [
+  "jestes moim słonicem (zapomnialem jak sie pisze - altzhaimers)",
+  "jesteś sliczna no ajax inaczej",
+  "całuski od joela (i Maćka)",
+  "I will tickle your toes tonight",
+  "umilasz każdy mój dzień",
+  "slodko wygladasz na kazdym zdjeciu"
+];
 
-// Function to create a floating heart
-function createFloatingHeart() {
+// Function to get a random message
+function getRandomMessage() {
+  return messages[Math.floor(Math.random() * messages.length)];
+}
+
+// Function to display a new message
+function displayMessage() {
+  const heartMessage = document.getElementById('heartMessage');
+  heartMessage.textContent = getRandomMessage();
+}
+
+// Add event listener to the button
+document.getElementById('nextMessageButton').addEventListener('click', displayMessage);
+
+// Display the first message on page load
+window.addEventListener('load', () => {
+  displayMessage();
+  positionPhotos(); // Ensure photos are positioned correctly
+});
+
+// Function to create a heart element
+function createHeart() {
   const heart = document.createElement('div');
   heart.classList.add('heart');
   heart.innerHTML = '❤️';
@@ -18,23 +43,41 @@ function createFloatingHeart() {
   }, 5000);
 }
 
-// Function to position photos randomly without overlapping
+// Function to check if two elements overlap
+function isOverlapping(element1, element2) {
+  const rect1 = element1.getBoundingClientRect();
+  const rect2 = element2.getBoundingClientRect();
+
+  return !(
+    rect1.top > rect2.bottom ||
+    rect1.bottom < rect2.top ||
+    rect1.left > rect2.right ||
+    rect1.right < rect2.left
+  );
+}
+
+// Function to check if a photo overlaps the text
+function overlapsText(photo) {
+  const text = document.querySelector('.container');
+  return isOverlapping(photo, text);
+}
+
+// Function to position and rotate photos randomly
 function positionPhotos() {
   const photos = document.querySelectorAll('.sticky-note');
   const text = document.querySelector('.container');
   const textRect = text.getBoundingClientRect();
   const padding = 20; // Minimum distance from text and other photos
-  const photoSize = window.innerWidth <= 600 ? 100 : 150; // Adjust size for mobile
 
   photos.forEach(photo => {
     let x, y, rotation;
     let overlap = true;
     let attempts = 0;
 
+    // Keep trying to position the photo until it doesn't overlap
     while (overlap && attempts < 100) {
-      // Adjust for screen size
-      x = Math.random() * (window.innerWidth - photoSize);
-      y = Math.random() * (window.innerHeight - photoSize);
+      x = Math.random() * (window.innerWidth - 150); // 150 is the width of the photo
+      y = Math.random() * (window.innerHeight - 150); // 150 is the height of the photo
       rotation = (Math.random() * 20) - 10; // Random rotation between -10deg and 10deg
 
       // Set the position and rotation
@@ -67,78 +110,8 @@ function positionPhotos() {
   });
 }
 
-// Function to check if two elements overlap
-function isOverlapping(element1, element2) {
-  const rect1 = element1.getBoundingClientRect();
-  const rect2 = element2.getBoundingClientRect();
-
-  // Add padding to the collision detection
-  const padding = 20;
-  return !(
-    rect1.top + padding > rect2.bottom - padding ||
-    rect1.bottom - padding < rect2.top + padding ||
-    rect1.left + padding > rect2.right - padding ||
-    rect1.right - padding < rect2.left + padding
-  );
-}
-
-// Function to check if a photo overlaps the text
-function overlapsText(photo) {
-  const text = document.querySelector('.container');
-  return isOverlapping(photo, text);
-}
-
-// Switch to Minigame
-playButton.addEventListener('click', () => {
-  mainPage.classList.add('hidden');
-  minigamePage.classList.remove('hidden');
-  startMinigame();
-});
-
-// Minigame Logic
-let score = 0;
-let timeLeft = 10;
-
-function startMinigame() {
-  score = 0;
-  timeLeft = 10;
-  document.getElementById('score').textContent = `Wynik: ${score}`;
-
-  // Spawn hearts every 500ms
-  const heartInterval = setInterval(() => {
-    if (timeLeft <= 0) {
-      clearInterval(heartInterval);
-      alert(`Koniec gry! Twój wynik: ${score}`);
-      mainPage.classList.remove('hidden');
-      minigamePage.classList.add('hidden');
-      return;
-    }
-
-    // Create a heart for the minigame
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = '❤️';
-    heart.style.left = Math.random() * (window.innerWidth - 50) + 'px';
-    heart.style.top = Math.random() * (window.innerHeight - 100) + 'px';
-    heart.addEventListener('click', () => {
-      score++;
-      document.getElementById('score').textContent = `Wynik: ${score}`;
-      heart.remove();
-    });
-    document.getElementById('hearts-container').appendChild(heart);
-  }, 500);
-
-  // Countdown timer
-  const timer = setInterval(() => {
-    timeLeft--;
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-    }
-  }, 1000);
-}
-
-// Create floating hearts every 300ms on the main page
-setInterval(createFloatingHeart, 300);
+// Create hearts every 300ms
+setInterval(createHeart, 300);
 
 // Position photos on page load
 window.addEventListener('load', positionPhotos);
